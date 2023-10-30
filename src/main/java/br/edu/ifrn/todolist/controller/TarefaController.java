@@ -18,10 +18,8 @@ import org.springframework.data.domain.Pageable;
 
 import br.edu.ifrn.todolist.domain.tarefa.Tarefa;
 import br.edu.ifrn.todolist.repository.TarefaRepository;
-import lombok.extern.log4j.Log4j2;
 
 @RestController
-@Log4j2
 @RequestMapping("tarefas")
 public class TarefaController {
 
@@ -30,7 +28,7 @@ public class TarefaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity criar(@RequestBody Tarefa tarefa,
+    public ResponseEntity<Object> criar(@RequestBody Tarefa tarefa,
                                 UriComponentsBuilder uriBuilder){
         Tarefa tarefaLocal = repository.save(tarefa);
         var uri = uriBuilder.path("/tarefas/{id}").
@@ -47,7 +45,7 @@ public class TarefaController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity excluir(@PathVariable Long id){
+    public ResponseEntity<Object> excluir(@PathVariable Long id){
         var tarefa = repository.getReferenceById(id);
         repository.delete(tarefa);
         return ResponseEntity.noContent().build();

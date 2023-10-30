@@ -33,14 +33,6 @@ public class UserController {
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<Object> excluir(@PathVariable Long id) {
-        var user = repository.getReferenceById(id);
-        repository.delete(user);
-        return ResponseEntity.noContent().build();
-    }
-
     @PutMapping
     @Transactional
     public ResponseEntity<User> atualizar(@RequestBody User user) {
@@ -52,4 +44,12 @@ public class UserController {
         return ResponseEntity.ok(userLocal);
     }
 
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Object> excluir(@PathVariable Long id) {
+        var user = repository.getReferenceById(id);
+        repository.delete(user);
+        return ResponseEntity.noContent().build();
+    }
 }
