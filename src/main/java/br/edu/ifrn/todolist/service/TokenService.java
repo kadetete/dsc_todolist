@@ -18,11 +18,11 @@ import br.edu.ifrn.todolist.domain.user.User;
 public class TokenService {
 
   @Value("${api.tarefa.token.secret}")
-  private String seacret;
+  private String secret;
 
   public String gerarToken(User user) {
     try {
-      Algorithm algorithm = Algorithm.HMAC256(seacret);
+      Algorithm algorithm = Algorithm.HMAC256(secret);
       return JWT.create()
           .withIssuer("API Controle de tarefa IFRN")
           .withSubject(user.getEmail())
@@ -36,7 +36,7 @@ public class TokenService {
 
   public String getSubject(String tokenJWT) {
     try {
-      Algorithm algorithm = Algorithm.HMAC256(seacret);
+      Algorithm algorithm = Algorithm.HMAC256(secret);
       return JWT.require(algorithm)
           // specify an specific claim validations
           .withIssuer("API Controle de tarefa IFRN")
