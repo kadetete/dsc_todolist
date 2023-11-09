@@ -27,7 +27,18 @@ public class SecurityConfigurations {
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and().authorizeHttpRequests()
         .requestMatchers(HttpMethod.POST, "/login", "/users", "/").permitAll()
-        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html", "/swagger-ui.html", "/v3/api-docs.html").permitAll()
+        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html", 
+        "/swagger-ui.html", 
+        "/swagger-ui/index.css", 
+        "/swagger-ui/swagger-ui.css",
+        "/swagger-ui/swagger-ui-standalone-preset.js",
+        "/swagger-ui/swagger-initializer.js",
+        "/swagger-ui/swagger-ui-bundle.js",
+        "/v3/api-docs/swagger-config",
+        "/v3/api-docs",
+        "/v3/api-docs/",
+        "/swagger-ui/favicon-16x16.png",
+        "/swagger-ui/favicon-32x32.png").permitAll()
         .anyRequest().authenticated()
         .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
